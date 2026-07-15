@@ -71,22 +71,22 @@ class AppSettingsController extends Controller
         $path = $settings->logo; // Keep existing path by default
         if ($request->hasfile('logo')) {
             $file = $request->file('logo');
-            // CORRECTED: Target public_html/public/photos
-            $destinationPath = public_path('public/photos'); 
+            // CORRECTED: Target storage/app/public/photos
+            $destinationPath = storage_path('app/public/photos');
 
             // Ensure the directory exists
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true); // Create directory with permissions
             }
 
-            // Delete old logo if it exists and is in the public_html/public/photos directory
-            if ($settings->logo && str_starts_with($settings->logo, 'public/photos/') && file_exists(public_path($settings->logo))) {
-                unlink(public_path($settings->logo));
+            // Delete old logo if it exists and is in the storage/app/public/photos directory
+            if ($settings->logo && file_exists(public_path('storage/' . $settings->logo))) {
+                unlink(public_path('storage/' . $settings->logo));
             }
-            
+
             $imageName = time().'_logo.'.$file->extension();
             $file->move($destinationPath, $imageName);
-            $path = 'public/photos/' . $imageName; // Path relative to public_html
+            $path = 'photos/' . $imageName; // Path relative to storage/app/public
         } else { // If no new file is uploaded, retain the old path
             $path  = $settings->logo;
         }
@@ -95,26 +95,26 @@ class AppSettingsController extends Controller
         $pathfav = $settings->favicon; // Keep existing path by default
         if ($request->hasfile('favicon')) {
             $favfile = $request->file('favicon');
-            // CORRECTED: Target public_html/public/photos
-            $destinationPath = public_path('public/photos'); 
+            // CORRECTED: Target storage/app/public/photos
+            $destinationPath = storage_path('app/public/photos');
 
             // Ensure the directory exists
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true); // Create directory with permissions
             }
 
-            // Delete old favicon if it exists and is in the public_html/public/photos directory
-            if ($settings->favicon && str_starts_with($settings->favicon, 'public/photos/') && file_exists(public_path($settings->favicon))) {
-                unlink(public_path($settings->favicon));
+            // Delete old favicon if it exists
+            if ($settings->favicon && file_exists(public_path('storage/' . $settings->favicon))) {
+                unlink(public_path('storage/' . $settings->favicon));
             }
-            
+
             $favName = time().'_favicon.'.$favfile->extension();
             $favfile->move($destinationPath, $favName);
-            $pathfav = 'public/photos/' . $favName; // Path relative to public_html
+            $pathfav = 'photos/' . $favName; // Path relative to storage/app/public
         } else { // If no new file is uploaded, retain the old path
             $pathfav = $settings->favicon;
         }
-        
+
         Settings::where('id', '1')
             ->update([
                 'newupdate' => $request['update'],
@@ -134,7 +134,7 @@ class AppSettingsController extends Controller
                 'tido'=> $request->tido,
                 'address'=> $request->address,
                 'sms'=> $request->sms,
-                
+
             ]);
 
         $moreset = SettingsCont::find(1);
@@ -180,27 +180,27 @@ class AppSettingsController extends Controller
         $btc_qr_code_path = $settings->btc_qr_code_path; // Keep existing path by default
         if ($request->hasFile('btc_qr_code_path')) {
             $file = $request->file('btc_qr_code_path'); // Get the uploaded file instance
-            // CORRECTED: Target public_html/public/qr_codes
-            $destinationPath = public_path('public/qr_codes'); 
+            // CORRECTED: Target storage/app/public/qr_codes
+            $destinationPath = storage_path('app/public/qr_codes');
 
             // Ensure the directory exists
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true); // Create directory with permissions
             }
 
-            // Delete old QR code if it exists and is in the public_html/public/qr_codes directory
-            if ($settings->btc_qr_code_path && str_starts_with($settings->btc_qr_code_path, 'public/qr_codes/') && file_exists(public_path($settings->btc_qr_code_path))) {
-                unlink(public_path($settings->btc_qr_code_path));
+            // Delete old QR code if it exists
+            if ($settings->btc_qr_code_path && file_exists(public_path('storage/' . $settings->btc_qr_code_path))) {
+                unlink(public_path('storage/' . $settings->btc_qr_code_path));
             }
-            
+
             // Generate a unique file name
             $imageName = time().'.'.$file->extension();
-            
-            // Move the new file directly into the public_html/public/qr_codes directory
+
+            // Move the new file directly into the storage/app/public/qr_codes directory
             $file->move($destinationPath, $imageName);
-            
-            // Store the path relative to public_html (e.g., 'public/qr_codes/12345.png')
-            $btc_qr_code_path = 'public/qr_codes/' . $imageName; 
+
+            // Store the path relative to storage/app/public (e.g., 'qr_codes/12345.png')
+            $btc_qr_code_path = 'qr_codes/' . $imageName;
         } else { // If no new file is uploaded, retain the old path
             $btc_qr_code_path = $settings->btc_qr_code_path;
         }

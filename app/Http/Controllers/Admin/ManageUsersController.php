@@ -636,8 +636,8 @@ public function saveuser(Request $request){
         if (in_array($ext, $whitelist)) {
 
               $cardname = $strtxt . $filename1 . time();
-              // save to storage/app/uploads as the new $filename
-              $path = $document1->storeAs('public/photos', $cardname);
+              // save to storage/app/public/photos as the new $filename
+              $path = $document1->storeAs('photos', $cardname, 'public');
 
 
         } else {
@@ -682,8 +682,8 @@ public function saveuser(Request $request){
         if (in_array($ext, $whitelist)) {
 
               $cardname = $strtxt . $filename1 . time();
-              // save to storage/app/uploads as the new $filename
-              $path = $document1->storeAs('public/photos', $cardname);
+              // save to storage/app/public/photos as the new $filename
+              $path = $document1->storeAs('photos', $cardname, 'public');
 
 
         } else {

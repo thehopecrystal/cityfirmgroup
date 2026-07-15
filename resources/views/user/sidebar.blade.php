@@ -2,8 +2,8 @@
 <div class="sidenav" id="sidenav-main">
     <!-- Sidenav header -->
     <div class="sidenav-header d-flex align-items-center">
-        <a class="navbar-brand" href="{{ route('dashboard') }}">
-            <img src="{{ asset('/public/' . $settings->logo) }}" class="navbar-brand-img" alt="logo">
+            <a class="navbar-brand" href="{{ route('dashboard') }}">
+            <img src="{{ asset('storage/' . $settings->logo) }}" class="navbar-brand-img" alt="logo">
         </a>
         <div class="ml-auto">
             <!-- Sidenav toggler -->
@@ -93,7 +93,7 @@
                 <span class="pt-2 btn-inner--icon d-block">Transfer funds</span>
             </a>
         @endif
-       
+
         <a href="{{ route('profile') }}"
             class="text-sm btn btn-square {{ request()->routeIs('profile') ? 'active' : '' }}">
             <span class="btn-inner--icon d-block"><i class="fas fa-address-card fa-2x"></i></span>

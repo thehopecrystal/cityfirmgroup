@@ -11,26 +11,26 @@
             <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-white rounded-full mix-blend-overlay floating-slow"></div>
             <div class="absolute bottom-1/3 right-1/4 w-96 h-96 bg-white rounded-full mix-blend-overlay floating"></div>
             <div class="absolute top-2/3 left-1/3 w-40 h-40 bg-white rounded-full mix-blend-overlay floating-slower"></div>
-            
+
             <!-- Grid pattern -->
             <div class="absolute inset-0" style="background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 20px 20px;"></div>
         </div>
-        
+
         <!-- Content -->
         <div class="relative flex flex-col justify-center items-center w-full h-full text-white p-12 z-10">
             <!-- Logo -->
             <a href="/" class="mb-6">
-                <img src="{{ asset('/public/' . $settings->logo) }}" alt="CityFirm" class="h-16 filter brightness-0 invert">
+                <img src="{{ asset('storage/' . $settings->logo) }}" alt="CityFirm" class="h-16 filter brightness-0 invert">
             </a>
-            
+
             <!-- Title -->
             <h1 class="text-4xl font-extrabold mb-6 text-center">Start Banking with Us</h1>
-            
+
             <!-- Description -->
             <p class="text-xl mb-8 max-w-md text-center text-white/80">
                 Create your {{ $settings->site_name }} account in just a few steps and enjoy our full range of banking services.
             </p>
-            
+
             <!-- Benefits -->
             <div class="w-full max-w-md space-y-4">
                 <div class="flex items-start space-x-3">
@@ -41,7 +41,7 @@
                         <span class="font-medium text-white">Secure Banking Platform</span> - Industry-leading security protocols to keep your funds safe
                     </p>
                 </div>
-                
+
                 <div class="flex items-start space-x-3">
                     <div class="flex-shrink-0 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center mt-0.5">
                         <i data-lucide="check" class="h-3 w-3"></i>
@@ -50,7 +50,7 @@
                         <span class="font-medium text-white">Fast Transfers</span> - Send and receive money quickly to anyone, anywhere
                     </p>
                 </div>
-                
+
                 <div class="flex items-start space-x-3">
                     <div class="flex-shrink-0 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center mt-0.5">
                         <i data-lucide="check" class="h-3 w-3"></i>
@@ -69,17 +69,17 @@
             <!-- Mobile Logo -->
             <div class="lg:hidden text-center mb-8">
                 <a href="/">
-                    <img src="{{ asset('storage/app/public/' . $settings->logo) }}" alt="Logo" class="h-12 mx-auto">
+                    <img src="{{ asset('storage/' . $settings->logo) }}" alt="Logo" class="h-12 mx-auto">
                 </a>
             </div>
-            
+
             <!-- Alerts -->
             @if (Session::has('status'))
                 <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded" role="alert">
                     <p>{{ session('status') }}</p>
                 </div>
             @endif
-            
+
             @if ($errors->any())
                 <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded" role="alert">
                     <ul class="list-disc list-inside">
@@ -89,9 +89,9 @@
                     </ul>
                 </div>
             @endif
-            
+
             <!-- Registration Card -->
-            <div x-data="{ 
+            <div x-data="{
                 step: 1,
                 totalSteps: 4,
                 formData: {
@@ -145,12 +145,12 @@
                         <h2 class="text-2xl font-bold text-gray-900">Create Your Account</h2>
                         <span class="text-sm font-medium text-gray-500">Step <span x-text="step"></span> of <span x-text="totalSteps"></span></span>
                     </div>
-                    
+
                     <!-- Progress Bar -->
                     <div class="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
                         <div class="h-full bg-primary-600 rounded-full transition-all duration-300 ease-in-out" :style="'width: ' + progress + '%'"></div>
                     </div>
-                    
+
                     <!-- Step Titles -->
                     <div class="flex justify-between mt-2 text-xs text-gray-500">
                         <div class="text-center" :class="{ 'text-primary-600 font-medium': step >= 1 }">Personal Info</div>
@@ -159,12 +159,12 @@
                         <div class="text-center" :class="{ 'text-primary-600 font-medium': step >= 4 }">Security</div>
                     </div>
                 </div>
-                
+
                 <!-- Form Container -->
                 <div class="px-8 py-6">
                     <form action="{{ route('register') }}" method="post" id="registration-form">
                         @csrf
-                        
+
                         <!-- Step 1: Personal Information -->
                         <div x-show="step === 1" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                             <div class="text-center mb-6">
@@ -174,58 +174,58 @@
                                 <h3 class="text-lg font-medium text-gray-900">Personal Information</h3>
                                 <p class="mt-1 text-sm text-gray-500">Please provide your legal name as it appears on official documents</p>
                             </div>
-                            
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <!-- First Name -->
                                 <div>
                                     <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Legal First Name *</label>
-                                    <input 
-                                        type="text" 
-                                        id="name" 
-                                        name="name" 
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
                                         x-model="formData.name"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                         placeholder="John"
                                         required>
                                     @if ($errors->has('name'))
                                         <p class="mt-1 text-sm text-red-600">{{ $errors->first('name') }}</p>
                                     @endif
                                 </div>
-                                
+
                                 <!-- Middle Name -->
                                 <div>
                                     <label for="middlename" class="block text-sm font-medium text-gray-700 mb-2">Middle Name</label>
-                                    <input 
-                                        type="text" 
-                                        id="middlename" 
-                                        name="middlename" 
+                                    <input
+                                        type="text"
+                                        id="middlename"
+                                        name="middlename"
                                         x-model="formData.middlename"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                         placeholder="David">
                                 </div>
-                                
+
                                 <!-- Last Name -->
                                 <div>
                                     <label for="lastname" class="block text-sm font-medium text-gray-700 mb-2">Legal Last Name *</label>
-                                    <input 
-                                        type="text" 
-                                        id="lastname" 
-                                        name="lastname" 
+                                    <input
+                                        type="text"
+                                        id="lastname"
+                                        name="lastname"
                                         x-model="formData.lastname"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                         placeholder="Smith"
                                         required>
                                 </div>
-                                
+
                                 <!-- Username -->
                                 <div>
                                     <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username *</label>
-                                    <input 
-                                        type="text" 
-                                        id="username" 
-                                        name="username" 
+                                    <input
+                                        type="text"
+                                        id="username"
+                                        name="username"
                                         x-model="formData.username"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                         placeholder="johnsmith123"
                                         required>
                                     @if ($errors->has('username'))
@@ -234,7 +234,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Step 2: Contact Information -->
                         <div x-show="step === 2" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                             <div class="text-center mb-6">
@@ -244,7 +244,7 @@
                                 <h3 class="text-lg font-medium text-gray-900">Contact Information</h3>
                                 <p class="mt-1 text-sm text-gray-500">We'll use these details to communicate with you about your account</p>
                             </div>
-                            
+
                             <div class="space-y-6 mb-6">
                                 <!-- Email -->
                                 <div>
@@ -253,12 +253,12 @@
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                                             <i data-lucide="mail" class="h-5 w-5 text-gray-400"></i>
                                         </div>
-                                        <input 
-                                            type="email" 
-                                            id="email" 
-                                            name="email" 
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
                                             x-model="formData.email"
-                                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                             placeholder="john.smith@example.com"
                                             required>
                                     </div>
@@ -266,7 +266,7 @@
                                         <p class="mt-1 text-sm text-red-600">{{ $errors->first('email') }}</p>
                                     @endif
                                 </div>
-                                
+
                                 <!-- Phone -->
                                 <div>
                                     <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
@@ -274,12 +274,12 @@
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                                             <i data-lucide="phone" class="h-5 w-5 text-gray-400"></i>
                                         </div>
-                                        <input 
-                                            type="tel" 
-                                            id="phone" 
-                                            name="phone" 
+                                        <input
+                                            type="tel"
+                                            id="phone"
+                                            name="phone"
                                             x-model="formData.phone"
-                                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                             placeholder="+1 (234) 567-8901"
                                             required>
                                     </div>
@@ -287,7 +287,7 @@
                                         <p class="mt-1 text-sm text-red-600">{{ $errors->first('phone') }}</p>
                                     @endif
                                 </div>
-                                
+
                                 <!-- Country -->
                                 <div>
                                     <label for="country" class="block text-sm font-medium text-gray-700 mb-2">Country *</label>
@@ -295,9 +295,9 @@
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                                             <i data-lucide="globe" class="h-5 w-5 text-gray-400"></i>
                                         </div>
-                                        <select 
-                                            id="country" 
-                                            name="country" 
+                                        <select
+                                            id="country"
+                                            name="country"
                                             x-model="formData.country"
                                             class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 appearance-none"
                                             required>
@@ -314,7 +314,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Step 3: Account Setup -->
                         <div x-show="step === 3" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                             <div class="text-center mb-6">
@@ -324,7 +324,7 @@
                                 <h3 class="text-lg font-medium text-gray-900">Account Setup</h3>
                                 <p class="mt-1 text-sm text-gray-500">Choose your account type and set up your transaction PIN</p>
                             </div>
-                            
+
                             <div class="space-y-6 mb-6">
                                 <!-- Account Type -->
                                 <div>
@@ -349,7 +349,7 @@
                                                 </div>
                                             </div>
                                         </label>
-                                        
+
                                         <label @click="formData.accounttype = 'Savings Account'" class="relative block cursor-pointer">
                                             <input type="radio" name="accounttype" value="Savings Account" x-model="formData.accounttype" class="sr-only">
                                             <div class="border rounded-lg p-4 transition-all" :class="formData.accounttype === 'Savings Account' ? 'border-primary-500 bg-primary-50 ring-2 ring-primary-500' : 'border-gray-300 hover:border-primary-300'">
@@ -370,17 +370,17 @@
                                             </div>
                                         </label>
                                     </div>
-                                    
+
                                     <!-- Additional account types dropdown for more options -->
                                     <div class="mt-4" x-data="{ open: false }">
-                                        <button 
-                                            type="button" 
-                                            @click="open = !open" 
+                                        <button
+                                            type="button"
+                                            @click="open = !open"
                                             class="w-full text-left flex items-center justify-between text-sm text-primary-600 hover:text-primary-700 focus:outline-none">
                                             <span>Show more account types</span>
                                             <i data-lucide="chevron-down" class="h-4 w-4" :class="{'transform rotate-180': open}"></i>
                                         </button>
-                                        
+
                                         <div x-show="open" x-transition class="mt-2 space-y-2">
                                             <template x-for="(type, index) in [
                                                 {value: 'Fixed Deposit Account', label: 'Fixed Deposit Account', desc: 'Highest interest rates for fixed terms', icon: 'calendar'},
@@ -414,7 +414,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Transaction PIN -->
                                 <div>
                                     <label for="pin" class="block text-sm font-medium text-gray-700 mb-2">Transaction PIN (4 digits) *</label>
@@ -422,17 +422,17 @@
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                                             <i data-lucide="key" class="h-5 w-5 text-gray-400"></i>
                                         </div>
-                                        <input 
-                                            :type="showPin ? 'text' : 'password'" 
-                                            id="pin" 
-                                            name="pin" 
+                                        <input
+                                            :type="showPin ? 'text' : 'password'"
+                                            id="pin"
+                                            name="pin"
                                             x-model="formData.pin"
-                                            class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                            class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                             placeholder="••••"
                                             maxlength="4"
                                             pattern="[0-9]{4}"
                                             required>
-                                        <button 
+                                        <button
                                             type="button"
                                             @click="showPin = !showPin"
                                             class="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -444,7 +444,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Step 4: Security -->
                         <div x-show="step === 4" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                             <div class="text-center mb-6">
@@ -454,7 +454,7 @@
                                 <h3 class="text-lg font-medium text-gray-900">Secure Your Account</h3>
                                 <p class="mt-1 text-sm text-gray-500">Create a strong password to protect your account</p>
                             </div>
-                            
+
                             <div class="space-y-6 mb-6">
                                 <!-- Password -->
                                 <div x-data="{ showPassword: false }">
@@ -463,15 +463,15 @@
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                                             <i data-lucide="lock" class="h-5 w-5 text-gray-400"></i>
                                         </div>
-                                        <input 
-                                            :type="showPassword ? 'text' : 'password'" 
-                                            id="password" 
-                                            name="password" 
+                                        <input
+                                            :type="showPassword ? 'text' : 'password'"
+                                            id="password"
+                                            name="password"
                                             x-model="formData.password"
-                                            class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                            class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                             placeholder="••••••••"
                                             required>
-                                        <button 
+                                        <button
                                             type="button"
                                             @click="showPassword = !showPassword"
                                             class="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -482,21 +482,21 @@
                                     @if ($errors->has('password'))
                                         <p class="mt-1 text-sm text-red-600">{{ $errors->first('password') }}</p>
                                     @endif
-                                    
+
                                     <!-- Password Strength Meter -->
-                                    <div class="mt-2" x-data="{ 
+                                    <div class="mt-2" x-data="{
                                         get strength() {
                                             let score = 0;
-                                            
+
                                             // Length check
                                             if (formData.password.length > 7) score += 1;
                                             if (formData.password.length > 10) score += 1;
-                                            
+
                                             // Complexity checks
                                             if (/[A-Z]/.test(formData.password)) score += 1;
                                             if (/[0-9]/.test(formData.password)) score += 1;
                                             if (/[^A-Za-z0-9]/.test(formData.password)) score += 1;
-                                            
+
                                             return score;
                                         },
                                         get strengthLabel() {
@@ -523,8 +523,8 @@
                                             }"></span></p>
                                         </div>
                                         <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-                                            <div 
-                                                class="h-full transition-all duration-300 ease-in-out" 
+                                            <div
+                                                class="h-full transition-all duration-300 ease-in-out"
                                                 :class="strengthColor"
                                                 :style="`width: ${(strength / 5) * 100}%`"></div>
                                         </div>
@@ -552,7 +552,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Confirm Password -->
                                 <div x-data="{ showPassword: false }">
                                     <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password *</label>
@@ -560,15 +560,15 @@
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                                             <i data-lucide="lock" class="h-5 w-5 text-gray-400"></i>
                                         </div>
-                                        <input 
-                                            :type="showPassword ? 'text' : 'password'" 
-                                            id="password_confirmation" 
-                                            name="password_confirmation" 
+                                        <input
+                                            :type="showPassword ? 'text' : 'password'"
+                                            id="password_confirmation"
+                                            name="password_confirmation"
                                             x-model="formData.password_confirmation"
-                                            class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                                            class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                                             placeholder="••••••••"
                                             required>
-                                        <button 
+                                        <button
                                             type="button"
                                             @click="showPassword = !showPassword"
                                             class="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -576,8 +576,8 @@
                                             <i data-lucide="eye-off" class="h-5 w-5 text-gray-400" x-show="showPassword"></i>
                                         </button>
                                     </div>
-                                    <p 
-                                        class="mt-1 text-sm" 
+                                    <p
+                                        class="mt-1 text-sm"
                                         x-show="formData.password && formData.password_confirmation"
                                         :class="formData.password === formData.password_confirmation ? 'text-green-600' : 'text-red-600'">
                                         <span x-show="formData.password === formData.password_confirmation">
@@ -588,16 +588,16 @@
                                         </span>
                                     </p>
                                 </div>
-                                
+
                                 <!-- Terms and Conditions -->
                                 <div>
                                     <label class="flex items-start">
-                                        <input 
-                                            type="checkbox" 
-                                            id="terms" 
-                                            name="terms" 
+                                        <input
+                                            type="checkbox"
+                                            id="terms"
+                                            name="terms"
                                             x-model="formData.terms"
-                                            class="rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 mt-1" 
+                                            class="rounded border-gray-300 text-primary-600 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 mt-1"
                                             required>
                                         <span class="ml-2 text-sm text-gray-600">
                                             I agree to the <a href="/terms" target="_blank" class="text-primary-600 hover:text-primary-500 underline">Terms of Service</a> and <a href="/privacy" target="_blank" class="text-primary-600 hover:text-primary-500 underline">Privacy Policy</a>
@@ -606,37 +606,37 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Step Navigation -->
                         <div class="flex justify-between pt-4 border-t border-gray-200">
-                            <button 
-                                type="button" 
-                                x-show="step > 1" 
+                            <button
+                                type="button"
+                                x-show="step > 1"
                                 @click="prevStep"
                                 class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
                                 <i data-lucide="chevron-left" class="h-4 w-4 mr-2"></i>
                                 Previous
                             </button>
                             <div x-show="step === 1"></div>
-                            
-                            <button 
-                                type="button" 
-                                x-show="step < totalSteps" 
+
+                            <button
+                                type="button"
+                                x-show="step < totalSteps"
                                 @click="nextStep"
                                 class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
                                 Next
                                 <i data-lucide="chevron-right" class="h-4 w-4 ml-2"></i>
                             </button>
-                            
-                            <button 
-                                type="submit" 
+
+                            <button
+                                type="submit"
                                 x-show="step === totalSteps"
                                 class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
                                 <i data-lucide="check" class="h-4 w-4 mr-2"></i>
                                 Create Account
                             </button>
                         </div>
-                        
+
                         <!-- Hidden form fields to ensure data is submitted even if user doesn't visit every step -->
                         <input type="hidden" name="name" :value="formData.name">
                         <input type="hidden" name="middlename" :value="formData.middlename">
@@ -651,11 +651,11 @@
                         <input type="hidden" name="password_confirmation" :value="formData.password_confirmation">
                     </form>
                 </div>
-                
+
                 <!-- Login Link -->
                 <div class="text-center mt-4 pb-4">
                     <p class="text-sm text-gray-600">
-                        Already have an account? 
+                        Already have an account?
                         <a href="{{ route('login') }}" class="text-primary-600 hover:text-primary-500 font-medium">
                             Sign in instead
                         </a>
@@ -675,18 +675,18 @@
             return false;
         }
     }
-    
+
     // When the DOM is loaded
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize Lucide icons
         lucide.createIcons();
-        
+
         // Prevent spaces in username field
         const usernameInput = document.getElementById('username');
         if (usernameInput) {
             usernameInput.addEventListener('keypress', restrictSpaces);
         }
-        
+
         // Restrict PIN to numbers only
         const pinInput = document.getElementById('pin');
         if (pinInput) {

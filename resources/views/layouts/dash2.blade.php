@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $settings->site_name }} | @yield('title')</title>
     <meta name="description" content="Swift and Secure Money Transfer to any UK bank account will become a breeze with {{$settings->site_name}}." />
-    <link rel="shortcut icon" href="{{ asset('/public/' . $settings->favicon) }}" />
+    <link rel="shortcut icon" href="{{ asset('storage/' . $settings->favicon) }}" />
     <link rel="preload" href="path/to/GraphikRegular.otf" as="font" type="font/otf" crossorigin="anonymous">
 
 
@@ -290,7 +290,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-center flex-shrink-0 px-4 mb-6">
                     <a href="/" class="flex items-center">
-                        <img src="{{ asset('/public/'.$settings->logo)}}" alt="Logo" class="h-10 w-auto">
+                        <img src="{{ asset('storage/'.$settings->logo)}}" alt="Logo" class="h-10 w-auto">
                     </a>
                 </div>
 
@@ -300,7 +300,7 @@
                         <div class="flex items-center mb-3">
     <div class="flex-shrink-0 mr-3">
         @if(!empty(Auth::user()->profile_photo_path))
-            <img src="{{ asset('public/' . Auth::user()->profile_photo_path) }}"
+            <img src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
      alt="{{ Auth::user()->name }}"
         class="h-10 w-10 rounded-full object-cover border-2 border-primary-100">
         @else
@@ -464,7 +464,7 @@
                             <i data-lucide="menu" class="h-6 w-6"></i>
                         </button>
                         <a href="/" class="ml-4">
-                            <img src="{{ asset('/public/'.$settings->logo)}}" alt="Logo" class="h-8 w-auto">
+                            <img src="{{ asset('storage/'.$settings->logo)}}" alt="Logo" class="h-8 w-auto">
                         </a>
                     </div>
 
@@ -577,7 +577,7 @@
     @if(!empty(Auth::user()->profile_photo_path))
         <img
             class="h-8 w-8 rounded-full object-cover border-2 border-gray-200"
-            src="{{ asset('/public/'.Auth::user()->profile_photo_path)}}"
+            src="{{ asset('storage/'.Auth::user()->profile_photo_path)}}"
             alt="{{ Auth::user()->name }}"
         >
     @else
@@ -685,7 +685,7 @@
                         <div class="flex-shrink-0 mr-3">
     @if(!empty(Auth::user()->profile_photo_path))
         <img
-            src="{{ asset('/public/photos/'.Auth::user()->profile_photo_path)}}"
+            src="{{ asset('storage/'.Auth::user()->profile_photo_path)}}"
             alt="{{ Auth::user()->name }}"
             class="h-12 w-12 rounded-full object-cover border-2 border-primary-100">
     @else
@@ -908,7 +908,7 @@
             <footer class="bg-white border-t border-gray-200 hidden md:block">
                 <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 md:flex md:items-center md:justify-between">
                     <div class="flex items-center">
-                        <img src="{{ asset('/public/'.$settings->logo)}}" alt="Logo" class="h-6 w-auto mr-2">
+                        <img src="{{ asset('storage/'.$settings->logo)}}" alt="Logo" class="h-6 w-auto mr-2">
                         <p class="text-sm text-gray-500">© {{ date('Y') }} {{ $settings->site_name }}. All rights reserved.</p>
                     </div>
                     <div class="flex space-x-6 mt-4 md:mt-0">

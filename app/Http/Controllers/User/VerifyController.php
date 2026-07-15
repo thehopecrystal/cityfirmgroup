@@ -68,7 +68,7 @@ class VerifyController extends Controller
                 'dob'=> $request->dob,
                 'address' =>  $request->address,
             ]);
-            
+
         // Create notification for KYC submission
         NotificationHelper::create(
             $user,
@@ -78,33 +78,33 @@ class VerifyController extends Controller
             'shield',
             route('account.verify')
         );
-            
-            
+
+
             $strtxt = $this->RandomStringGenerator(6);
-        
+
         if($request->hasfile('photo')){
 
             $document1 = $request->file('photo');
             $filename1 = $document1->getClientOriginalName();
             $ext = array_pop(explode(".", $filename1));
             $whitelist = array('jpeg','jpg','png');
-  
+
             if (in_array($ext, $whitelist)) {
-  
+
                   $cardname = $strtxt . $filename1 . time();
-                  // save to storage/app/uploads as the new $filename
-                  $path = $document1->storeAs('public/photos', $cardname);
-              
-  
+                  // save to storage/app/public/photos as the new $filename
+                  $path = $document1->storeAs('photos', $cardname, 'public');
+
+
             } else {
              $cardname = null;
             }
-          
+
         //update user
         User::where('id',Auth::user()->id)
         ->update([
             'profile_photo_path' => $cardname,
-           
+
         ]);
       }
 
@@ -115,21 +115,21 @@ class VerifyController extends Controller
         Mail::to($settings->contact_email)->send(new NewNotification($message, $subject, 'Admin', $url));
 
         return redirect()->route('account.verify')->with('success', 'Action Sucessful! Please wait while we verify your application. You will receive an email regarding the status of your application.');
-   
+
     }
-    
-    
-    function RandomStringGenerator($n) 
-   { 
-       $generated_string = ""; 
-       $domain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"; 
-       $len = strlen($domain); 
-       for ($i = 0; $i < $n; $i++) 
-       { 
-           $index = rand(0, $len - 1); 
-           $generated_string = $generated_string . $domain[$index]; 
-       } 
-       // Return the random generated string 
-       return $generated_string; 
-   } 
+
+
+    function RandomStringGenerator($n)
+   {
+       $generated_string = "";
+       $domain = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+       $len = strlen($domain);
+       for ($i = 0; $i < $n; $i++)
+       {
+           $index = rand(0, $len - 1);
+           $generated_string = $generated_string . $domain[$index];
+       }
+       // Return the random generated string
+       return $generated_string;
+   }
 }

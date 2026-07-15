@@ -2,11 +2,11 @@
 <nav class="navbar navbar-main navbar-expand-lg navbar-dark bg-primary navbar-border" id="navbar-main">
     <div class="container-fluid">
         <!-- Brand + Toggler (for mobile devices) -->
-        <div class="pl-4 d-block d-md-none">
-            <a class="navbar-brand" href="{{ route('dashboard') }}">
-                <img src="{{ asset('/public/' . $settings->logo) }}" class="navbar-brand-img" alt="...">
-            </a>
-        </div>
+    <div class="pl-4 d-block d-md-none">
+        <a class="navbar-brand" href="{{ route('dashboard') }}">
+            <img src="{{ asset('storage/' . $settings->logo) }}" class="navbar-brand-img" alt="...">
+        </a>
+    </div>
 
         <!-- User's navbar -->
         <div class="ml-auto navbar-user d-lg-none">
