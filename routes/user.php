@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CryptoController; // NEW: Import the new CryptoController
 
 // Email verification routes
-Route::get('/verify-email', 'App\Http\Controllers\User\UsersController@verifyemail')->middleware('auth')->name('verification.notice');;
+Route::get('/verify-email', 'App\Http\Controllers\User\UsersController@verifyemail')->middleware('auth')->name('user.verify-email');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
 	$request->fulfill();
@@ -109,7 +109,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('dashboard')->group(func
 
 		Route::get('referuser', [ViewsController::class, 'referuser'])->name('referuser');
 		Route::get('loan', [ViewsController::class, 'loan'])->name('loan');
-		Route::post('loan', [LoanController::class, 'loan'])->name('loan');
+		Route::post('loan', [LoanController::class, 'loan'])->name('loan.process');
 		Route::get('viewloan', [LoanController::class, 'veiwloans'])->name('veiwloan');
 
 		Route::get('manage-account-security', [ViewsController::class, 'twofa'])->name('twofa');
@@ -155,10 +155,10 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('dashboard')->group(func
 		Route::get('otpview', [WithdrawalController::class, 'otpview'])->name('otpview');
 		Route::post('completewithdrawal', [WithdrawalController::class, 'completewithdrawal'])->name('completewithdrawal');
 
-		Route::post('internationaltransfer', [WithdrawalController::class, 'internationaltransfer'])->name('internationaltransfer');
+		Route::post('internationaltransfer', [WithdrawalController::class, 'internationaltransfer'])->name('internationaltransfer.process');
 		Route::post('codecomfirm', [WithdrawalController::class, 'codecomfirm'])->name('codecomfirm');
 		Route::get('previewinternationaltransfer', [ViewsController::class, 'previewinternationaltransfer'])->name('previewinternationaltransfer');
-		Route::post('localtransfer', [WithdrawalController::class, 'localtransfer'])->name('localtransfer');
+		Route::post('localtransfer', [WithdrawalController::class, 'localtransfer'])->name('localtransfer.process');
 		Route::get('previewtransfer', [WithdrawalController::class, 'previewtransfer'])->name('previewtransfer');
 
 		// Export transactions route
@@ -209,7 +209,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('dashboard')->group(func
 		Route::get('/renew-subscription', [TransferController::class, 'renewSignalSub'])->name('renewsignals');
 
 		// Virtual Card Routes
-		Route::get('cards', [CardController::class, 'index'])->name('cards');
+		Route::get('cards', [CardController::class, 'index'])->name('user.cards');
 		Route::get('cards/apply', [CardController::class, 'showApplicationForm'])->name('cards.apply');
 		Route::post('cards/apply', [CardController::class, 'applyCard'])->name('cards.apply.post');
 		Route::get('cards/{card}', [CardController::class, 'viewCard'])->name('cards.view');

@@ -24,7 +24,7 @@ Route::get('maortgage', [HomePageController::class, 'mortgages'])->name('mortgag
 Route::get('insurance', [HomePageController::class, 'insurance'])->name('insurance');
 Route::get('cooperate', [HomePageController::class, 'cooperate'])->name('cooperate');
 Route::get('loans', [HomePageController::class, 'loans'])->name('loans');
-Route::get('send-money', [HomePageController::class, 'loans'])->name('loans');
+Route::get('send-money', [HomePageController::class, 'loans'])->name('send-money');
 Route::get('cards', [HomePageController::class, 'cards'])->name('cards');
 Route::get('personal', [HomePageController::class, 'personal'])->name('personal');
 Route::get('savings', [HomePageController::class, 'savings'])->name('savings');
@@ -32,6 +32,6 @@ Route::get('private', [HomePageController::class, 'private'])->name('private');
 Route::get('verify',[HomePageController::class,'verify']);
 Route::post('homesendcontact', [HomePageController::class, 'homesendcontact'] )->name('homesendcontact');
 Route::get('services', [HomePageController::class, 'services'])->name('services');
-Route::get('terms-of-service', [HomePageController::class, 'terms'])->name('terms');
+Route::get('terms-of-service', [HomePageController::class, 'terms'])->name('terms-of-service');
 Route::get('alerts', [HomePageController::class, 'business'])->name('business');
 Route::post('enquiryfront', [HomePageController::class, 'enquiryfront'] )->name('enquiryfront');
